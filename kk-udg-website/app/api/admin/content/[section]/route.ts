@@ -2,12 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 import { updateSection, type SiteContent } from "@/lib/content";
 
 const VALID_SECTIONS: (keyof SiteContent)[] = [
+  "homepage",
   "players",
   "fixtures",
   "news",
   "partners",
   "staff",
-  "board",
   "contact",
   "support",
 ];

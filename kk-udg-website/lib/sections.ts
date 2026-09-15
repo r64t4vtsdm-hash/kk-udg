@@ -15,6 +15,20 @@ export type SectionConfig = {
 
 export const SECTIONS: SectionConfig[] = [
   {
+    slug: "homepage",
+    label: "Početna strana",
+    description: "Tekst i fotografije na naslovnoj strani i u sekciji \"O klubu\".",
+    kind: "object",
+    fields: [
+      { key: "heroTagline", label: "Tekst ispod naslova KK UDG", type: "textarea" },
+      { key: "heroPhotoUrl", label: "Link do naslovne fotografije (opciono)" },
+      { key: "aboutTitle", label: "Naslov sekcije \"O klubu\"" },
+      { key: "aboutText1", label: "O klubu — prvi pasus", type: "textarea" },
+      { key: "aboutText2", label: "O klubu — drugi pasus", type: "textarea" },
+      { key: "aboutPhotoUrl", label: "Link do fotografije u sekciji \"O klubu\" (opciono)" },
+    ],
+  },
+  {
     slug: "players",
     label: "Igrači",
     description: "Imena, brojevi, pozicije i osnovni podaci igrača.",
@@ -24,6 +38,7 @@ export const SECTIONS: SectionConfig[] = [
       { key: "number", label: "Broj dresa" },
       { key: "position", label: "Pozicija" },
       { key: "sub", label: "Godište · visina" },
+      { key: "photoUrl", label: "Link do slike igrača (opciono)" },
     ],
     emptyItemLabel: "Novi igrač",
   },
@@ -40,25 +55,16 @@ export const SECTIONS: SectionConfig[] = [
     emptyItemLabel: "Nova osoba",
   },
   {
-    slug: "board",
-    label: "Upravni odbor",
-    description: "Članovi upravnog odbora kluba.",
-    kind: "list",
-    fields: [
-      { key: "name", label: "Ime i prezime" },
-      { key: "role", label: "Funkcija" },
-    ],
-    emptyItemLabel: "Novi član",
-  },
-  {
     slug: "news",
     label: "Vijesti",
-    description: "Novosti i objave kluba.",
+    description: "Novosti i objave kluba — svaka vijest se otvara na svojoj strani.",
     kind: "list",
     fields: [
       { key: "title", label: "Naslov" },
       { key: "date", label: "Datum" },
-      { key: "excerpt", label: "Tekst", type: "textarea" },
+      { key: "photoUrl", label: "Link do fotografije (opciono)" },
+      { key: "excerpt", label: "Kratak uvodni tekst (prikazuje se na početnoj)", type: "textarea" },
+      { key: "text", label: "Pun tekst vijesti (prikazuje se kad se otvori vijest)", type: "textarea" },
     ],
     emptyItemLabel: "Nova vijest",
   },

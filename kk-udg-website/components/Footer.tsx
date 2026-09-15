@@ -17,11 +17,11 @@ export default function Footer({ contact }: { contact: Contact }) {
             </div>
           </div>
           <div className="footer-links">
-            <a href="#top">Početna</a>
-            <a href="#oklubu">O klubu</a>
-            <a href="#igraci">Igrači</a>
-            <a href="#raspored">Raspored</a>
-            <a href="#vijesti">Vijesti</a>
+            <a href="/">Početna</a>
+            <a href="/#oklubu">O klubu</a>
+            <a href="/#igraci">Igrači</a>
+            <a href="/#raspored">Raspored</a>
+            <a href="/#vijesti">Vijesti</a>
           </div>
         </div>
 

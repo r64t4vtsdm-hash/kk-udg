@@ -4,7 +4,6 @@ import Stats from "@/components/Stats";
 import About from "@/components/About";
 import Players from "@/components/Players";
 import Staff from "@/components/Staff";
-import Board from "@/components/Board";
 import Schedule from "@/components/Schedule";
 import News from "@/components/News";
 import Partners from "@/components/Partners";
@@ -20,12 +19,16 @@ export default async function Home() {
   return (
     <>
       <Header />
-      <Hero />
+      <Hero tagline={content.homepage.heroTagline} photoUrl={content.homepage.heroPhotoUrl} />
       <Stats />
-      <About />
+      <About
+        title={content.homepage.aboutTitle}
+        text1={content.homepage.aboutText1}
+        text2={content.homepage.aboutText2}
+        photoUrl={content.homepage.aboutPhotoUrl}
+      />
       <Players players={content.players} />
       <Staff staff={content.staff} />
-      <Board board={content.board} />
       <Schedule firstLeg={content.fixtures.firstLeg} secondLeg={content.fixtures.secondLeg} />
       <News news={content.news} />
       <Partners partners={content.partners} />

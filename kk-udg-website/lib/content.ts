@@ -5,6 +5,7 @@ export type Player = {
   number: string;
   position: string;
   sub: string;
+  photoUrl: string;
 };
 
 export type Fixture = {
@@ -16,6 +17,8 @@ export type NewsItem = {
   title: string;
   date: string;
   excerpt: string;
+  text: string;
+  photoUrl: string;
 };
 
 export type Partner = {
@@ -28,11 +31,6 @@ export type StaffMember = {
   name: string;
   role: string;
   photoUrl: string;
-};
-
-export type BoardMember = {
-  name: string;
-  role: string;
 };
 
 export type Contact = {
@@ -48,23 +46,44 @@ export type Support = {
   bank: string;
 };
 
+export type Homepage = {
+  heroTagline: string;
+  heroPhotoUrl: string;
+  aboutTitle: string;
+  aboutText1: string;
+  aboutText2: string;
+  aboutPhotoUrl: string;
+};
+
 export type SiteContent = {
+  homepage: Homepage;
   players: Player[];
   fixtures: { firstLeg: Fixture[]; secondLeg: Fixture[] };
   news: NewsItem[];
   partners: Partner[];
   staff: StaffMember[];
-  board: BoardMember[];
   contact: Contact;
   support: Support;
 };
 
 export const defaultContent: SiteContent = {
+  homepage: {
+    heroTagline:
+      "Košarkaški klub Univerziteta Donja Gorica. Ista energija i disciplina koju ekipa nosi na parket, prenesena i na predavanja — i obrnuto.",
+    heroPhotoUrl: "",
+    aboutTitle: "Univerzitetski klub, takmičarski duh",
+    aboutText1:
+      "Košarkaški klub UDG okuplja igrače Univerziteta Donja Gorica koji sezonu igraju s istom ozbiljnošću kao i ispite — trening do treninga, korak po korak do bolje pozicije na tabeli.",
+    aboutText2:
+      "U maju 2026. dio ekipe je nosio dres Crne Gore na međunarodnom studentskom turniru Sias Intercontinental Basketball Tour u Kini, gdje se klub predstavio pred internacionalnom konkurencijom. Sad je fokus na novoj sezoni: dvadeset utakmica protiv deset ekipa iz cijele Crne Gore, u jesenjem i proljećnom dijelu prvenstva.",
+    aboutPhotoUrl: "",
+  },
   players: Array.from({ length: 10 }, () => ({
     name: "Ime Prezime",
     number: "#0",
     position: "Pozicija",
     sub: "Godište · visina",
+    photoUrl: "",
   })),
   fixtures: {
     firstLeg: [
@@ -97,12 +116,14 @@ export const defaultContent: SiteContent = {
       title: "Naslov vijesti",
       date: "",
       excerpt:
-        "Ovo je primjer vijesti — izmijenite ili obrišite ga iz admin panela i dodajte prave vijesti kluba.",
+        "Ovo je kratak uvodni tekst vijesti koji se vidi na početnoj strani — izmijenite ili obrišite ga iz admin panela i dodajte prave vijesti kluba.",
+      text:
+        "Ovo je pun tekst vijesti koji se vidi kad neko klikne \"Pročitaj više\". Ovdje možete napisati cijelu priču, koliko god dugačku želite.",
+      photoUrl: "",
     },
   ],
   partners: [],
   staff: [],
-  board: [],
   contact: { email: "", phone: "", instagram: "", facebook: "" },
   support: {
     heading: "Podržite klub",
@@ -132,12 +153,12 @@ export async function getContent(): Promise<SiteContent> {
     const stored = await redis.get<Partial<SiteContent>>(CONTENT_KEY);
     if (!stored) return defaultContent;
     return {
+      homepage: { ...defaultContent.homepage, ...stored.homepage },
       players: stored.players ?? defaultContent.players,
       fixtures: stored.fixtures ?? defaultContent.fixtures,
       news: stored.news ?? defaultContent.news,
       partners: stored.partners ?? defaultContent.partners,
       staff: stored.staff ?? defaultContent.staff,
-      board: stored.board ?? defaultContent.board,
       contact: { ...defaultContent.contact, ...stored.contact },
       support: { ...defaultContent.support, ...stored.support },
     };

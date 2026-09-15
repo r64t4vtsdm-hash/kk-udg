@@ -13,8 +13,15 @@ export default function Players({ players }: { players: Player[] }) {
           {players.map((p, n) => (
             <div className="player-card" key={n}>
               <div className="player-photo">
-                <span className="ph-number">{String(n + 1).padStart(2, "0")}</span>
-                <span className="ph-tag">Slika uskoro</span>
+                {p.photoUrl ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={p.photoUrl} alt={p.name} />
+                ) : (
+                  <>
+                    <span className="ph-number">{String(n + 1).padStart(2, "0")}</span>
+                    <span className="ph-tag">Slika uskoro</span>
+                  </>
+                )}
               </div>
               <div className="player-body">
                 <div className="player-name">{p.name}</div>
