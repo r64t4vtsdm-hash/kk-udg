@@ -1,7 +1,10 @@
 import Image from "next/image";
 import logo from "@/public/images/logo.jpg";
+import type { Contact } from "@/lib/content";
 
-export default function Footer() {
+export default function Footer({ contact }: { contact: Contact }) {
+  const hasContact = contact.email || contact.phone || contact.instagram || contact.facebook;
+
   return (
     <footer className="site" id="kontakt">
       <div className="wrap">
@@ -18,12 +21,30 @@ export default function Footer() {
             <a href="#oklubu">O klubu</a>
             <a href="#igraci">Igrači</a>
             <a href="#raspored">Raspored</a>
+            <a href="#vijesti">Vijesti</a>
           </div>
         </div>
-        <p className="footer-note">
-          Kontakt podaci i društvene mreže kluba biće dodati ovdje — pošaljite email,
-          telefon ili Instagram/Facebook link kluba pa ih odmah dodajem.
-        </p>
+
+        {hasContact ? (
+          <div className="footer-contact">
+            {contact.email && <a href={`mailto:${contact.email}`}>{contact.email}</a>}
+            {contact.phone && <a href={`tel:${contact.phone}`}>{contact.phone}</a>}
+            {contact.instagram && (
+              <a href={contact.instagram} target="_blank" rel="noopener noreferrer">
+                Instagram
+              </a>
+            )}
+            {contact.facebook && (
+              <a href={contact.facebook} target="_blank" rel="noopener noreferrer">
+                Facebook
+              </a>
+            )}
+          </div>
+        ) : (
+          <p className="footer-note">
+            Kontakt podaci i društvene mreže kluba biće dodati ovdje uskoro.
+          </p>
+        )}
       </div>
     </footer>
   );

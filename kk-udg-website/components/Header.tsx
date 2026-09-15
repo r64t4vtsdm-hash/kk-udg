@@ -12,7 +12,11 @@ export default function Header() {
         <nav className="links">
           <a href="#oklubu">O klubu</a>
           <a href="#igraci">Igrači</a>
+          <a href="#strucni-stab">Štab</a>
           <a href="#raspored">Raspored</a>
+          <a href="#vijesti">Vijesti</a>
+          <a href="#partneri">Partneri</a>
+          <a href="#podrska">Podrška</a>
           <a href="#kontakt">Kontakt</a>
         </nav>
       </div>

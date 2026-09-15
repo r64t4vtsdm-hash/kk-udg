@@ -1,22 +1,19 @@
-import { players } from "@/data/players";
+import type { Player } from "@/lib/content";
 
-export default function Players() {
+export default function Players({ players }: { players: Player[] }) {
   return (
     <section id="igraci">
       <div className="wrap">
         <div className="section-head">
           <p className="eyebrow">Ekipa</p>
           <h2>Igrači</h2>
-          <p>
-            Kartice su spremne za popunu — pošaljite imena, brojeve, pozicije i slike
-            igrača pa ih odmah ubacujem umjesto placeholdera.
-          </p>
+          <p>Sastav ekipe za sezonu 2026/27.</p>
         </div>
         <div className="players-grid">
-          {players.map((p) => (
-            <div className="player-card" key={p.n}>
+          {players.map((p, n) => (
+            <div className="player-card" key={n}>
               <div className="player-photo">
-                <span className="ph-number">{String(p.n).padStart(2, "0")}</span>
+                <span className="ph-number">{String(n + 1).padStart(2, "0")}</span>
                 <span className="ph-tag">Slika uskoro</span>
               </div>
               <div className="player-body">
@@ -30,10 +27,6 @@ export default function Players() {
             </div>
           ))}
         </div>
-        <p className="players-note">
-          Redoslijed i broj kartica se lako mijenja — javite ako ekipa ima više ili
-          manje od deset igrača.
-        </p>
       </div>
     </section>
   );

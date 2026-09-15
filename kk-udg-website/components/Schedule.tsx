@@ -1,16 +1,22 @@
-import { firstLeg, secondLeg, type Fixture } from "@/data/fixtures";
+import type { Fixture } from "@/lib/content";
 
-function FixtureCard({ f }: { f: Fixture }) {
+function FixtureCard({ f, n }: { f: Fixture; n: number }) {
   return (
     <div className="fixture">
-      <span className="num">{String(f.n).padStart(2, "0")}</span>
+      <span className="num">{String(n).padStart(2, "0")}</span>
       <div className="date">{f.date}</div>
       <div className="opp">{f.opponent}</div>
     </div>
   );
 }
 
-export default function Schedule() {
+export default function Schedule({
+  firstLeg,
+  secondLeg,
+}: {
+  firstLeg: Fixture[];
+  secondLeg: Fixture[];
+}) {
   return (
     <section id="raspored" className="schedule-band">
       <div className="wrap">
@@ -18,8 +24,8 @@ export default function Schedule() {
           <p className="eyebrow">Raspored</p>
           <h2>Utakmice sezone 2026/27</h2>
           <p>
-            Dvadeset kola, deset protivnika — svaka ekipa se igra dvaput, jednom u
-            jesenjem i jednom u proljećnom dijelu sezone.
+            Svaka ekipa se igra dvaput, jednom u jesenjem i jednom u proljećnom dijelu
+            sezone.
           </p>
         </div>
 
@@ -29,8 +35,8 @@ export default function Schedule() {
             <span>oktobar — januar</span>
           </div>
           <div className="fixtures">
-            {firstLeg.map((f) => (
-              <FixtureCard f={f} key={f.n} />
+            {firstLeg.map((f, i) => (
+              <FixtureCard f={f} n={i + 1} key={i} />
             ))}
           </div>
         </div>
@@ -41,17 +47,11 @@ export default function Schedule() {
             <span>januar — april</span>
           </div>
           <div className="fixtures">
-            {secondLeg.map((f) => (
-              <FixtureCard f={f} key={f.n} />
+            {secondLeg.map((f, i) => (
+              <FixtureCard f={f} n={firstLeg.length + i + 1} key={i} />
             ))}
           </div>
         </div>
-
-        <p className="schedule-note">
-          Raspored je prenijet sa zvaničnog rasporeda kluba — provjerite tačne datume i
-          domaćina/gosta prije objave, jer su parovi kola prepisani sa slike i mogući
-          su sitni previdi.
-        </p>
       </div>
     </section>
   );
