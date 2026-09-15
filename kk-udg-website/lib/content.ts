@@ -115,10 +115,14 @@ export const defaultContent: SiteContent = {
 const CONTENT_KEY = "kkudg:content";
 
 function getRedis(): Redis | null {
-  if (!process.env.UPSTASH_REDIS_REST_URL || !process.env.UPSTASH_REDIS_REST_TOKEN) {
+  const url =
+    process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
+  const token =
+    process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
+  if (!url || !token) {
     return null;
   }
-  return Redis.fromEnv();
+  return new Redis({ url, token });
 }
 
 export async function getContent(): Promise<SiteContent> {
