@@ -2,9 +2,12 @@ import type { Fixture } from "@/lib/content";
 
 function FixtureCard({ f, n }: { f: Fixture; n: number }) {
   return (
-    <div className={`fixture ${f.home ? "fixture-home" : "fixture-away"}`}>
+    <div className="fixture">
       <span className="num">{String(n).padStart(2, "0")}</span>
-      <span className="venue-tag">{f.home ? "Domaćin" : "Gost"}</span>
+      <span className="venue-tag">
+        <span className={`venue-dot ${f.home ? "venue-dot-home" : "venue-dot-away"}`} />
+        {f.home ? "Domaćin" : "Gost"}
+      </span>
       <div className="date">{f.date}</div>
       <div className="opp">{f.opponent}</div>
     </div>
@@ -24,6 +27,7 @@ export default function Schedule({
         <div className="section-head">
           <p className="eyebrow">Raspored</p>
           <h2>Utakmice sezone 2026/27</h2>
+          <p className="league-tag">Druga crnogorska liga</p>
         </div>
 
         <div className="leg">
@@ -49,6 +53,15 @@ export default function Schedule({
             ))}
           </div>
         </div>
+
+        <p className="schedule-note">
+          <span className="venue-tag">
+            <span className="venue-dot venue-dot-home" /> Domaćin — igramo na svom terenu
+          </span>
+          <span className="venue-tag">
+            <span className="venue-dot venue-dot-away" /> Gost — igramo na gostujućem terenu
+          </span>
+        </p>
       </div>
     </section>
   );

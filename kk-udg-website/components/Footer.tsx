@@ -50,11 +50,7 @@ export default function Footer({
               </a>
             )}
           </div>
-        ) : (
-          <p className="footer-note">
-            Kontakt podaci i društvene mreže kluba biće dodati ovdje uskoro.
-          </p>
-        )}
+        ) : null}
       </div>
     </footer>
   );
